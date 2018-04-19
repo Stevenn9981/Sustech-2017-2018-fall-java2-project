@@ -1,0 +1,28 @@
+.root {  
+     -fx-background-image:url("../background.jpg") ;  
+}  
+.tabpane {  
+     -fx-background-color:rgb(101,219,154);
+     -fx-border-color: rgb(255,255,255);
+}  
+
+.num-button  {
+    -fx-background-color: rgb(255,128,128);
+    -fx-background-radius: 50%;
+    -fx-background-insets: 0, 1, 2;
+    -fx-font-family:  "Helvetica";
+    -fx-text-fill:  rgb(255,255,255);
+    -fx-font-size:  23px;
+}
+
+.table-view {
+    -fx-base:rgb(229,229,229) ;
+    -fx-control-inner-background:rgb(213,213,255);
+    -fx-background-color:rgb(173,214,214);
+    -fx-padding: 5;
+    
+}
+
+.tab{
+	-fx-background-color: rgb(101,219,154);
+} 

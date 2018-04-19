@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.canvas.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="701.0" prefWidth="938.0" stylesheets="@../theme.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="java2project.view.EarthquakeOverviewController">
+   <children>
+      <AnchorPane layoutX="58.0" layoutY="30.0">
+         <children>
+            <AnchorPane layoutX="7.0" prefHeight="132.0" prefWidth="718.0">
+               <children>
+                  <Label layoutX="26.0" layoutY="18.0" prefHeight="31.0" prefWidth="102.0" text="Magnitude &gt;= " textAlignment="CENTER" textFill="#1e1d1d">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="39.0" layoutY="65.0" text="From">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <DatePicker fx:id="fromDate" layoutX="77.0" layoutY="61.0" />
+                  <DatePicker fx:id="toDate" layoutX="300.0" layoutY="61.0" />
+                  <Label layoutX="273.0" layoutY="65.0" text="To">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="39.0" layoutY="99.0" text="Region">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <ComboBox fx:id="regionset" layoutX="95.0" layoutY="95.0" prefWidth="150.0" />
+                  <Slider fx:id="mag" blockIncrement="0.5" layoutX="128.0" layoutY="27.0" majorTickUnit="1.0" max="9.0" min="1.0" minorTickCount="1" prefHeight="14.0" prefWidth="446.0" showTickLabels="true" showTickMarks="true" value="1.0" />
+                  <Label fx:id="status" layoutX="322.0" layoutY="97.0" prefHeight="15.0" prefWidth="186.0" text="quakes" textAlignment="CENTER">
+                     <font>
+                        <Font name="Times New Roman Bold" size="16.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="search" layoutX="562.0" layoutY="63.0" mnemonicParsing="false" onAction="#handlesearch" prefHeight="64.0" prefWidth="120.0" styleClass="num-button" text="Search" />
+               </children>
+            </AnchorPane>
+            <TabPane layoutY="132.0" prefHeight="511.0" prefWidth="725.0" styleClass="tabpane">
+               <tabs>
+                  <Tab closable="false" text="Data">
+                     <content>
+                        <TableView fx:id="earthquakeTable" layoutY="262.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="501.0" prefWidth="669.0" styleClass="tabpane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                          <columns>
+                              <TableColumn fx:id="dateAndTime" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="170.0" text="date and time(UTC)" />
+                            <TableColumn fx:id="latitude" minWidth="-1.0" prefWidth="67.0" text="latitude" />
+                            <TableColumn fx:id="longitude" minWidth="-1.0" prefWidth="75.0" text="longitude" />
+                              <TableColumn fx:id="depth" minWidth="-1.0" prefWidth="59.0" text="depth" />
+                              <TableColumn fx:id="magnitude" minWidth="-1.0" prefWidth="73.0" text="magnitude" />
+                              <TableColumn fx:id="region" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="269.0" text="region" />
+                          </columns>
+                        </TableView>
+                     </content>
+                  </Tab>
+                  <Tab closable="false" text="Map">
+                    <content>
+                        <AnchorPane fx:id="apMercator" prefHeight="470.0" prefWidth="743.0">
+                           <children>
+                              <ImageView fx:id="iv" fitHeight="512.0" fitWidth="743.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../Mercator.jpg" />
+                                 </image>
+                              </ImageView>
+                              <Canvas fx:id="cvMercator" height="519.0" layoutY="1.0" width="743.0" />
+                           </children>
+                        </AnchorPane>
+                    </content>
+                  </Tab>
+                  <Tab closable="false" text="Chart By Magnitude">
+                    <content>
+                      <AnchorPane fx:id="chartMagnitudePane" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <BarChart fx:id="Chart1" layoutX="59.0" layoutY="24.0" prefHeight="483.0" prefWidth="723.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                <xAxis>
+                                  <CategoryAxis side="BOTTOM" />
+                                </xAxis>
+                                <yAxis>
+                                  <NumberAxis side="LEFT" />
+                                </yAxis>
+                              </BarChart>
+                           </children>
+                        </AnchorPane>
+                    </content>
+                  </Tab>
+                  <Tab closable="false" text="Chart By Day">
+                    <content>
+                      <AnchorPane fx:id="chartDayPane" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <BarChart fx:id="Chart2" layoutX="61.0" layoutY="42.0" prefHeight="483.0" prefWidth="723.0" title="chart by day" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                <xAxis>
+                                  <CategoryAxis label="Day" side="BOTTOM" />
+                                </xAxis>
+                                <yAxis>
+                                  <NumberAxis label="Number of Quakes" side="LEFT" />
+                                </yAxis>
+                              </BarChart>
+                           </children>
+                        </AnchorPane>
+                    </content>
+                  </Tab>
+               </tabs>
+            </TabPane>
+         </children>
+      </AnchorPane>
+   </children>
+   <padding>
+      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+   </padding>
+</AnchorPane>
