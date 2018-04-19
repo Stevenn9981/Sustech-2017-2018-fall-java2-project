@@ -1,4 +1,4 @@
-# Sustech-2018-fall-java2-project
+# Sustech-2017-2018-fall-java2-project
 
 #### 本项目是一个运用到JavaFx, 数据库, 网页爬虫等技术的一个java项目。
 
