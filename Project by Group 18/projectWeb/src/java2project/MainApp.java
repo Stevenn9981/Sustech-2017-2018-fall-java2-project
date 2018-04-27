@@ -194,7 +194,7 @@ public class MainApp extends Application {
 			con.setAutoCommit(false);
 			PreparedStatement stmt;
 			ResultSet rs;
-			stmt = con.prepareStatement("select * from quakes");
+			stmt = con.prepareStatement("select * from quakes order by UTC_date desc");
 			rs = stmt.executeQuery();
 			rs.next();
 			regionSet.add(Earthquake.WORLDWIDE);
